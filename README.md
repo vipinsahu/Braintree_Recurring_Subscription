@@ -23,6 +23,13 @@ API credentials are unique account identifiers that must be added to your code b
     ?>
 The environment specifies where requests via the API should be directed – sandbox or production. Because you have a different set of API keys for each environment, you'll need to update your code depending on which environment you're working in.
 
+## Prerequisites
+> You must have to create `Plan` in the Braintree site
+
+> You must have to create `addons` and `discount` in the Braintree
+
+   - `addons` will be created with the *Add-on ID* `UpgradePlanAddOn` 
+   - `discount` will be created with the *Discount ID* `DowngradePlanDiscount` 
 
 ## Usage
 
