@@ -11,7 +11,7 @@ The following PHP packages are required and we can install via Composer.
 PHP version >= 7.2 is required. The Braintree PHP SDK is tested against PHP versions 7.3 and 7.4.
 
 ## Configuration
-API credentials are unique account identifiers that must be added to your code before you can process payments via the API.
+API credentials are unique account identifiers that must be added to your code(file `function.php`) before you can process payments via the API.
 
     <?php 
     $this->gateway =  new Braintree_Gateway([
