@@ -103,7 +103,7 @@ $name = $gateway->generateRandomName();
 ```
 The page will looks like below image.
 
-![](https://pandao.github.io/editor.md/examples/images/4.jpg)
+![](https://github.com/vipinsahu/Braintree_Recurring_Subscription/blob/master/images/braintree-demo.png)
 
 After submission of the above form, system will create below entities.
 1. > Cusromer
