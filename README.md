@@ -50,9 +50,6 @@ $name = $gateway->generateRandomName();
       var clientToken = "<?=$clientToken?>"; 
       braintree.setup(clientToken, "dropin", {
       	container: "dropin-container",
-      	paypal: {
-              flow: 'vault'
-           	}
       });
    </script>
 </head>
@@ -91,11 +88,11 @@ $name = $gateway->generateRandomName();
 </html>
 ```
 After submission of the above form, system will create below entities.
-> Cusromer
+1. > Cusromer
 
-> Customer Payment Method Token
+2. > Customer Payment Method Token
 
-> Subscription
+3. > Subscription
 
 - To *update* a subscription by running the below code or you would able to access update a `subscription` page by visiting the URL `http://localhost/BraintreeRecurringSubscription/subscription_update.php`
 
