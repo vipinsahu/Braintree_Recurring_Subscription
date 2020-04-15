@@ -191,7 +191,7 @@ class BrainTreeSubscription{
 	* Return : object
 	*/
 	public function getSubscriptionById($subscriptionId){
-		$this->gateway->subscription()->find($subscriptionId);
+		return $this->gateway->subscription()->find($subscriptionId);
 	}
 
 	/*
