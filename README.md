@@ -101,7 +101,7 @@ $name = $gateway->generateRandomName();
 </body>
 </html>
 ```
-The page will looks like below image.
+Whenevere we run the above code or access the page via URL then the page will look like below image.
 
 ![](https://github.com/vipinsahu/Braintree_Recurring_Subscription/blob/master/images/braintree-demo.png)
 
@@ -160,3 +160,6 @@ After submission of the above form, system will create below entities.
 </html>
 
 ```
+Whenevere we run the above code or access the page via URL then the page will look like below image.
+
+![](https://github.com/vipinsahu/Braintree_Recurring_Subscription/blob/master/images/braintree-update-demo.png)
