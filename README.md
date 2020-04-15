@@ -172,18 +172,11 @@ Whenevere we run the above code or access the page via URL then the page will lo
 ![](https://github.com/vipinsahu/Braintree_Recurring_Subscription/blob/master/images/braintree-update-demo.png)
 
 ## Credit card numbers for testing
-> 5105 1051 0510 5100
-
-> 4111 1111 1111 1210
-
-> 4111 1111 1113 1010
-
-> 4000 0000 0000 0002
-
-> 4026 0000 0000 0002
-
-> 5018 0000 0009
-
-> 5100 0000 0000 0008
-
-> 6011 0000 0000 0004
+- 5105 1051 0510 5100
+- 4111 1111 1111 1210
+- 4111 1111 1113 1010
+- 4000 0000 0000 0002
+- 4026 0000 0000 0002
+- 5018 0000 0009
+- 5100 0000 0000 0008
+- 6011 0000 0000 0004
