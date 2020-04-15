@@ -23,8 +23,7 @@ With the help of this repository, user can buy a subscription and update subscri
 
 
 ## Quick Start Example
-- To create a new subscription run the below code or URL (http://localhost/BraintreeRecurringSubscription)
-####HTML code
+- To create a new subscription by running the below code or after successful installation you would able to access create new `subscription` page by visiting the URL `http://localhost/BraintreeRecurringSubscription`
 
 ```html
 <?php
@@ -40,6 +39,7 @@ $clientToken = $gateway->getClientToken();
 $name = $gateway->generateRandomName();
 ?>
 <!doctype html> 
+<html>
 <head>
    <title>Braintree-Demo</title>
    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
@@ -90,4 +90,58 @@ $name = $gateway->generateRandomName();
 </body>
 </html>
 ```
+After submission of the above form, system will create below entities.
+> Cusromer
 
+> Customer Payment Method Token
+
+> Subscription
+
+- To *update* a subscription by running the below code or you would able to access update a `subscription` page by visiting the URL `http://localhost/BraintreeRecurringSubscription/subscription_update.php`
+
+
+```html
+<?php
+   require_once 'function.php';
+   
+   //Create class object to access methods 
+   $gateway = new BrainTreeSubscription();
+   
+   ?>
+<!doctype html> 
+<html>
+<head>
+   <meta charset="utf-8">
+   <meta http-equiv="X-UA-Compatible" content="IE=edge">
+   <meta name="viewport" content="width=device-width, initial-scale=1">
+   <title>Braintree Update Demo</title>
+   <link href="style.css" rel="stylesheet">
+</head>
+<body>
+   <div class="container">
+      <form method="post" id="paymentForm" action="subscription_updated_response.php">
+         <h4>Update Subscription</h4>
+         <ul>
+            <li>
+               <label for="subscriptionid">Subscription ID</label>
+               <input type="text" name="subscriptionId" id="subscriptionId" value="dc23hb"> 
+            </li>
+            <li>
+               <label for="plan">Select Plan </label>
+               <select name="plan" id="plan">
+                  <option value="">--Select--</option>
+                  <?php foreach($gateway->getPlans() as $plan){ ?>
+                  <option value="<?php echo $plan->id.':'.$plan->price; ?>"><?php echo $plan->name.'('.$plan->price.')'; ?></option>
+                  <?php } ?>
+               </select>
+            </li>
+            <li style="clear:both;">
+               <input type="submit" value="Pay Now" id="paymentButton" />
+            </li>
+         </ul>
+      </form>
+   </div>
+</body>
+</html>
+
+```
