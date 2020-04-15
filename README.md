@@ -113,7 +113,7 @@ Whenevere we run the above code or access the page via URL then the page will lo
 ![](https://github.com/vipinsahu/Braintree_Recurring_Subscription/blob/master/images/braintree-demo.png)
 
 After submission of the above form, system will create below entities.
-1. > Cusromer
+1. > Customer
 
 2. > Customer Payment Method Token
 
