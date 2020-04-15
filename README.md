@@ -101,6 +101,10 @@ $name = $gateway->generateRandomName();
 </body>
 </html>
 ```
+The page will looks like below image.
+
+![](https://pandao.github.io/editor.md/examples/images/4.jpg)
+
 After submission of the above form, system will create below entities.
 1. > Cusromer
 
