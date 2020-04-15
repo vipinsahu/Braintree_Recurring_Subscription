@@ -5,8 +5,8 @@ Braintree's recurring billing, you can charge your customers automatically in mo
 ## Dependencies
 
 The following PHP packages are required and we can install via Composer. 
-1. `braintree/braintree_php` | The Braintree PHP library provides integration access to the Braintree Gateway
-2. `nubs/random-name-generator` | A library to create interesting, sometimes entertaining, random names
+1. `braintree/braintree_php` Braintree PHP library provides integration access to the Braintree Gateway
+2. `nubs/random-name-generator` library to create interesting, sometimes entertaining, random names
 
 PHP version >= 7.2 is required. The Braintree PHP SDK is tested against PHP versions 7.3 and 7.4.
 
