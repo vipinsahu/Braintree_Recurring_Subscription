@@ -10,6 +10,20 @@ The following PHP packages are required and we can install via Composer.
 
 PHP version >= 7.2 is required. The Braintree PHP SDK is tested against PHP versions 7.3 and 7.4.
 
+## Configuration
+API credentials are unique account identifiers that must be added to your code before you can process payments via the API.
+
+    <?php 
+    $this->gateway =  new Braintree_Gateway([
+	 'environment'  => 'sandbox',
+	 'merchantId' 	=> 'XXXXXXXXXXX',
+	 'publicKey' 	=> 'XXXXXXXXXXX',
+	 'privateKey' 	=> 'XXXXXXXXXXX'
+	]);
+    ?>
+The environment specifies where requests via the API should be directed – sandbox or production. Because you have a different set of API keys for each environment, you'll need to update your code depending on which environment you're working in.
+
+
 ## Usage
 
 With the help of this repository, user can buy a subscription and update subscription in the mid of billing cycle. Below features that we have developed yet.
