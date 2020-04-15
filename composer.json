@@ -1,0 +1,6 @@
+{
+    "require": {
+        "braintree/braintree_php": "^3.40",
+        "nubs/random-name-generator": "^2.1"
+    }
+}
