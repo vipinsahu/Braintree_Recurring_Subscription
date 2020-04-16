@@ -5,13 +5,13 @@ Braintree's recurring billing, you can charge your customers automatically in mo
 ## Dependencies
 
 The following PHP packages are required and we can install via Composer. 
-1. `braintree/braintree_php` | The Braintree PHP library provides integration access to the Braintree Gateway
-2. `nubs/random-name-generator` | A library to create interesting, sometimes entertaining, random names
+1. `braintree/braintree_php` Braintree PHP library provides integration access to the Braintree Gateway
+2. `nubs/random-name-generator` library to create interesting, sometimes entertaining, random names
 
 PHP version >= 7.2 is required. The Braintree PHP SDK is tested against PHP versions 7.3 and 7.4.
 
 ## Configuration
-API credentials are unique account identifiers that must be added to your code before you can process payments via the API.
+API credentials are unique account identifiers that must be added to your code(file `function.php`) before you can process payments via the API.
 
     <?php 
     $this->gateway =  new Braintree_Gateway([
@@ -23,6 +23,13 @@ API credentials are unique account identifiers that must be added to your code b
     ?>
 The environment specifies where requests via the API should be directed – sandbox or production. Because you have a different set of API keys for each environment, you'll need to update your code depending on which environment you're working in.
 
+## Prerequisites
+> You must have to create `Plan` in the Braintree. For more detail [click here](https://articles.braintreepayments.com/guides/recurring-billing/plans).
+
+> You must have to create `addons` and `discount` in the Braintree. For more detail [click here](https://articles.braintreepayments.com/guides/recurring-billing/add-ons-discounts).
+
+   - `addons` will be created with the *Add-on ID* `UpgradePlanAddOn` 
+   - `discount` will be created with the *Discount ID* `DowngradePlanDiscount` 
 
 ## Usage
 
@@ -101,12 +108,12 @@ $name = $gateway->generateRandomName();
 </body>
 </html>
 ```
-The page will looks like below image.
+Whenevere we run the above code or access the page via URL then the page will look like below image.
 
-![](https://pandao.github.io/editor.md/examples/images/4.jpg)
+![](https://github.com/vipinsahu/Braintree_Recurring_Subscription/blob/master/images/braintree-demo.png)
 
 After submission of the above form, system will create below entities.
-1. > Cusromer
+1. > Customer
 
 2. > Customer Payment Method Token
 
@@ -160,3 +167,16 @@ After submission of the above form, system will create below entities.
 </html>
 
 ```
+Whenevere we run the above code or access the page via URL then the page will look like below image.
+
+![](https://github.com/vipinsahu/Braintree_Recurring_Subscription/blob/master/images/braintree-update-demo.png)
+
+## Credit card numbers for testing
+- 5105 1051 0510 5100
+- 4111 1111 1111 1210
+- 4111 1111 1113 1010
+- 4000 0000 0000 0002
+- 4026 0000 0000 0002
+- 5018 0000 0009
+- 5100 0000 0000 0008
+- 6011 0000 0000 0004
