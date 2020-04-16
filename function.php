@@ -68,6 +68,7 @@ class BrainTreeSubscription{
 	* Param  : None
 	* Return : None	
 	*/
+
 	public function createCustomer($data){
 		return $this->gateway->customer()->create([
 		    'firstName' 		=> $data['firstname'],
@@ -149,108 +150,12 @@ class BrainTreeSubscription{
 	}
 
 	/*
-	* This method is used to get formatted date
-	* Param  : array
-	* Return : object
-	*/
-	public function chargeAccordingToType($oldPlanPrice, $newPlanPrice, $leftDaysInBillingCycle, $totalDaysInBillingCycle){
-
-		if($oldPlanPrice <  $newPlanPrice){
-			$data = [
-				'type' 	=> 'addOns',
-				'price'	=> ($newPlanPrice - $oldPlanPrice) * ($leftDaysInBillingCycle / $totalDaysInBillingCycle)
-			];
-		}else{
-			$data = [
-				'type' 	=> 'discounts',
-				'price'	=> ($oldPlanPrice - $newPlanPrice) * ($leftDaysInBillingCycle / $totalDaysInBillingCycle)
-			];
-		}
-		return $data;
-	}
-
-	/*
-	* This method is used to get subscription by ID
-	* Param  : array
-	* Return : object
-	*/
-	public function prepareChargeData($subscription, $leftDaysInBillingCycle, $totalDaysInBillingCycle, $newPlanPrice){
-
-		$chagre = $this->chargeAccordingToType($subscription->price, $newPlanPrice, $leftDaysInBillingCycle, $totalDaysInBillingCycle);
-		return [
-			'price'				=> $this->formatAmount($chagre['price']),
-			'type'				=> $chagre['type'],
-			'planPrice'			=> $newPlanPrice,
-			'subscribedPrice'	=> $subscription->price,
-		];
-	}
-
-	/*
 	* This method is used to format amount
 	* Param  : array
 	* Return : object
 	*/
 	public function getSubscriptionById($subscriptionId){
 		return $this->gateway->subscription()->find($subscriptionId);
-	}
-
-	/*
-	* This method is used to get subscription by ID
-	* Param  : array
-	* Return : object
-	*/
-	public function prepareDataToSubscription($subscriptionId, $newPlanPrice){
-
-		//Get subscription information by ID
-		$subscription 				= $this->getSubscriptionById($subscriptionId);
-
-		//Prepare data to update subscription
-		$subscribedDate 			= $this->formatDate($subscription->billingPeriodStartDate);
-		$nextBillingCycleDate 		= $this->formatDate($subscription->nextBillingDate);
-		
-		$leftDaysInBillingCycle		= $this->getDays(date('Y-m-d'), $nextBillingCycleDate);
-		$totalDaysInBillingCycle 	= $this->getDays($subscribedDate, $nextBillingCycleDate);
-		return [
-			'subscribedPrice' 			=> $subscription->price,
-			'subscribedDate' 			=> $subscribedDate,
-			'nextBillingCycleDate' 		=> $nextBillingCycleDate,
-			'totalDaysInBillingCycle'	=> $totalDaysInBillingCycle,
-			'leftDaysInBillingCycle'	=> $leftDaysInBillingCycle,
-			'chargableData'				=> $this->prepareChargeData(
-				$subscription, $leftDaysInBillingCycle, $totalDaysInBillingCycle,$newPlanPrice
-			),
-		];
-	}
-
-	/*
-	* This method is used to prepare addOns or  discounts array format to update
-	* Param  : $subscription, $newPlanId
-	* Return : array
-	*/
-	public function createAddOnOrDiscount($subscription, $newPlanId){
-
-		if($subscription['chargableData']['type'] == 'addOns'){
-			$updateData = [
-			    'addOns' => array(
-			        'add' => array([
-			                'amount' 			=> $subscription['chargableData']['price'],
-			                'inheritedFromId' 	=> 'UpgradePlanAddOn'// Already created on BrainTree panel
-			            ]
-			        )
-			    )
-			];
-		}elseif($subscription['chargableData']['type'] == 'discounts'){
-			$updateData = [
-			    'discounts' => array(
-			        'add' => array([
-			                'amount' 			=> $subscription['chargableData']['price'],
-			                'inheritedFromId' 	=> 'DowngradePlanDiscount'// Already created on BrainTree panel
-			            ]
-			        )
-			    )
-			];
-		}	
-		return $updateData + ['options' => ['prorateCharges' => $this->prorateCharges], 'planId' => $newPlanId];	
 	}
 
 	/*
@@ -265,10 +170,12 @@ class BrainTreeSubscription{
 			$newPlanId		= $newPlanData[0];
 			$newPlanPrice	= $newPlanData[1];
 
-			//Prepare data to update subscription
-			$subscription 	= $this->prepareDataToSubscription($subscriptionId, $newPlanPrice);
-	 	
-	 		$result = $this->gateway->subscription()->update($subscriptionId, $this->createAddOnOrDiscount($subscription, $newPlanId));
+			$result = $this->gateway->subscription()->update($subscriptionId, [
+	 				'options' 	=> ['prorateCharges' => $this->prorateCharges], 
+	 				'planId' 	=> $newPlanId, 
+	 				'price' 	=> $newPlanPrice
+	 			]
+	 		);
 	 		if($result->success){
 	 			return $result;
 	 		}
